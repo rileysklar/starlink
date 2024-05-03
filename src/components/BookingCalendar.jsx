@@ -192,13 +192,20 @@ export default function BookingCalendar() {
             {errorMessage && <p className="text-red-500">{errorMessage}</p>}
           </div>
         </div>
-      </div>{" "}
-      <button
-        type="submit"
-        className={`${darkMode ? "" : "light-mode"} text-right p-4`}
-      >
-        Next ➡
-      </button>
+      </div>
+      <div className="flex justify-end">
+        <div className="flex flex-row items-center">
+          <button
+            type="submit"
+            className={`${
+              darkMode ? "" : "light-mode"
+            } flex flex-row justify-center items-center text-right gap-2 px-4`}
+          >
+            Next <img  fill: var(--text-color);
+ src="./arrow-r.svg" alt="Next" />
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
