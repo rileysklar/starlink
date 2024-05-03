@@ -4,7 +4,7 @@
   justify-content: center;
   padding: 12px;
   aspect-ratio: 1 / 1;
-  height: calc(100vh - 64px);
+  height: auto;
   width: 100%;
 }
 
