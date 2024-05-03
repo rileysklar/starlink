@@ -7,3 +7,15 @@
   height: calc(100vh - 64px);
   width: 100%;
 }
+
+.select-element {
+  background-color: var(--background);
+  color: var(--text-color);
+  border: 1px solid #e8e8e8;
+}
+
+.select-element.light-mode {
+  background-color: white;
+  color: #13151a;
+  border: 1px solid #13151a;
+}

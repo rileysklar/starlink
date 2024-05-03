@@ -1,0 +1,7 @@
+.button-element {
+  border: 1px solid var(--text-color);
+}
+
+.button-element.light-mode {
+  border-color: #13151a;
+}

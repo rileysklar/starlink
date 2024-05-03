@@ -3,6 +3,7 @@ import "./BookingCalendar.css";
 
 export default function BookingCalendar() {
   const [year, setYear] = useState(new Date().getFullYear());
+  const [darkMode, setDarkMode] = useState(true);
   const [month, setMonth] = useState(new Date().getMonth());
   const [quantity, setQuantity] = useState(1);
   const months = [
@@ -67,16 +68,31 @@ export default function BookingCalendar() {
     }
   }, [selectedRange]);
 
+  useEffect(() => {
+    document.body.classList.toggle("light-mode", !darkMode);
+  }, [darkMode]);
+
   return (
-    <div className="flex flex-col">
+    <div
+      className="flex flex-col"
+      style={{
+        backgroundColor: "var(--background)",
+        color: "var(--text-color)",
+      }}
+    >
       <div className="calendar-container">
         <div className="flex flex-col items-center space-y-4 pb-8">
           <div className="px-2 pt-4 border-2 w-auto bg-transparent rounded-xl shadow-lg ">
-            <div className="flex flex-col items-center space-y-3 border-b border-white pb-2">
+            <div
+              className="flex flex-col items-center space-y-3 border-b  pb-2"
+              style={{ borderColor: "rgba(var(--text), 1)" }}
+            >
               <select
                 value={quantity}
                 onChange={handleQuantityChange}
-                className="bg-transparent text-white py-2 px-3 rounded-full border border-white w-full text-center"
+                className={`py-2 px-3 rounded-full w-full text-center select-element ${
+                  darkMode ? "" : "light-mode"
+                }`}
               >
                 {Array.from({ length: 5 }, (_, i) => i + 1).map((quantity) => (
                   <option key={quantity} value={quantity}>
@@ -84,11 +100,14 @@ export default function BookingCalendar() {
                   </option>
                 ))}
               </select>
+
               <div className="flex justify-center space-x-3 px-2 w-full">
                 <select
                   value={month}
                   onChange={handleMonthChange}
-                  className="bg-transparent text-white py-2 px-3 rounded-full border border-white w-1/2 text-center"
+                  className={`bg-transparent py-2 px-3 rounded-full border w-1/2 text-center select-element ${
+                    darkMode ? "" : "light-mode"
+                  }`}
                 >
                   {months.map((name, index) => (
                     <option key={index} value={index}>
@@ -99,11 +118,13 @@ export default function BookingCalendar() {
                 <select
                   value={year}
                   onChange={handleYearChange}
-                  className="bg-transparent text-white py-2 px-3 rounded-full border border-white w-1/2 text-center"
+                  className={`bg-transparent py-2 px-3 rounded-full border w-1/2 text-center select-element ${
+                    darkMode ? "" : "light-mode"
+                  }`}
                 >
-                  {years.map((actualYear) => (
-                    <option key={actualYear} value={actualYear}>
-                      {actualYear}
+                  {years.map((year, index) => (
+                    <option key={index} value={year}>
+                      {year}
                     </option>
                   ))}
                 </select>
@@ -153,7 +174,7 @@ export default function BookingCalendar() {
               </div>
             </div>
           </div>
-          <div className="flex flex-col items-center p-4 border-2 rounded-xl mt-3 w-full">
+          <div className="flex flex-col items-center p-4 border-2 shadow-lg rounded-xl mt-3 w-full">
             <h3 className="text-xl">Selected Dates: </h3>
             <p>
               {selectedRange.start && selectedRange.end
