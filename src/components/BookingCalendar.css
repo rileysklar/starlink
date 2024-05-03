@@ -19,3 +19,11 @@
   color: #13151a;
   border: 1px solid #13151a;
 }
+
+.light-mode svg {
+  fill: #13151a;
+}
+
+.dark-mode svg {
+  fill: var(--text-color);
+}
