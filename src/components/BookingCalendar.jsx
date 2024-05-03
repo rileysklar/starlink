@@ -85,7 +85,7 @@ export default function BookingCalendar() {
           <div className="px-2 pt-4 border-2 w-auto bg-transparent rounded-xl ">
             <div
               className="flex flex-col items-center space-y-3 border-b  pb-2"
-              style={{ borderColor: "rgba(var(--text), 1)" }}
+              style={{ borderColor: "rgba(var(--text), .5)" }}
             >
               <select
                 value={quantity}
