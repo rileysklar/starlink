@@ -120,7 +120,7 @@ export default function BookingCalendar() {
               <div className="grid grid-cols-7 gap-1">
                 {placeholders.map((_, index) => (
                   <div
-                    className="flex rounded-full aspect-square justify-center items-center border border-gray-300 p-1"
+                    className="flex rounded-full aspect-square justify-center  items-center border border-gray-300 p-2"
                     key={`placeholder-${index}`}
                   ></div>
                 ))}
@@ -128,7 +128,7 @@ export default function BookingCalendar() {
                   const date = new Date(year, month, day);
                   return (
                     <div
-                      className={`flex justify-center rounded-full aspect-square items-center border border-gray-300 p-1 cursor-pointer 
+                      className={`flex justify-center rounded-full aspect-square text-sm items-center border border-gray-300 p-2 cursor-pointer 
         ${
           selectedRange.start?.getTime() === date.getTime() ||
           selectedRange.end?.getTime() === date.getTime()
