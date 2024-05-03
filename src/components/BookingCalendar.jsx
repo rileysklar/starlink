@@ -132,7 +132,7 @@ export default function BookingCalendar() {
         ${
           selectedRange.start?.getTime() === date.getTime() ||
           selectedRange.end?.getTime() === date.getTime()
-            ? "bg-teal-500"
+            ? "bg-cyan-300 text-indigo-950"
             : ""
         }
         ${
@@ -140,7 +140,7 @@ export default function BookingCalendar() {
           selectedRange.end &&
           date.getTime() > selectedRange.start.getTime() &&
           date.getTime() < selectedRange.end.getTime()
-            ? "bg-lime-500"
+            ? "bg-emerald-300 text-indigo-950"
             : ""
         }`}
                       key={day}
