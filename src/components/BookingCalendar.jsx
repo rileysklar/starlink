@@ -90,7 +90,7 @@ export default function BookingCalendar() {
               <select
                 value={quantity}
                 onChange={handleQuantityChange}
-                className={`py-2 px-3 rounded-full w-full text-center select-element ${
+                className={`py-2 px-3 rounded-full w-[94%] text-center select-element ${
                   darkMode ? "" : "light-mode"
                 }`}
               >
@@ -190,15 +190,15 @@ export default function BookingCalendar() {
                 : "None"}
             </p>
             {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-            <button
-              type="submit"
-              className="mt-6 hidden bg-transparent bg-white transition-all duration-200 text-indigo-950 py-2 px-3 rounded-full w-full text-center"
-            >
-              Submit
-            </button>
           </div>
         </div>
-      </div>
+      </div>{" "}
+      <button
+        type="submit"
+        className={`${darkMode ? "" : "light-mode"} text-right p-4`}
+      >
+        Next ➡
+      </button>
     </div>
   );
 }
