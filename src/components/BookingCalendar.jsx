@@ -82,7 +82,7 @@ export default function BookingCalendar() {
     >
       <div className="calendar-container">
         <div className="flex flex-col items-center space-y-4 pb-8">
-          <div className="px-2 pt-4 border-2 w-auto bg-transparent rounded-xl shadow-lg ">
+          <div className="px-2 pt-4 border-2 w-auto bg-transparent rounded-xl ">
             <div
               className="flex flex-col items-center space-y-3 border-b  pb-2"
               style={{ borderColor: "rgba(var(--text), 1)" }}
@@ -174,7 +174,7 @@ export default function BookingCalendar() {
               </div>
             </div>
           </div>
-          <div className="flex flex-col items-center p-4 border-2 shadow-lg rounded-xl mt-3 w-full">
+          <div className="flex flex-col items-center p-4 border-2 rounded-xl mt-3 w-full">
             <h3 className="text-xl">Selected Dates: </h3>
             <p>
               {selectedRange.start && selectedRange.end
