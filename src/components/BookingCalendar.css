@@ -1,11 +1,7 @@
 .calendar-container {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
-  padding: 12px;
-  aspect-ratio: 1 / 1;
-  height: auto;
-  width: 100%;
 }
 
 .select-element {

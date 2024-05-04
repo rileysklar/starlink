@@ -1,11 +1,15 @@
 import { useState, useEffect } from "react";
 import "./BookingCalendar.css";
 
-export default function BookingCalendar() {
+export default function BookingCalendar({
+  darkMode,
+  goBack,
+  selectedRange,
+  setSelectedRange,
+  onNext,
+}) {
   const [year, setYear] = useState(new Date().getFullYear());
-  const [darkMode, setDarkMode] = useState(true);
   const [month, setMonth] = useState(new Date().getMonth());
-  const [quantity, setQuantity] = useState(1);
   const months = [
     "January",
     "February",
@@ -27,15 +31,8 @@ export default function BookingCalendar() {
   const placeholders = Array.from({ length: firstDayOfMonth }, () => null);
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   const daysArray = Array.from({ length: daysInMonth }, (_, i) => i + 1);
-  const [selectedRange, setSelectedRange] = useState({
-    start: null,
-    end: null,
-  });
   const [isStartSelected, setIsStartSelected] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
-  const handleQuantityChange = (e) => {
-    setQuantity(e.target.value);
-  };
 
   const handleDayClick = (day) => {
     const date = new Date(year, month, day);
@@ -80,6 +77,7 @@ export default function BookingCalendar() {
         color: "var(--text-color)",
       }}
     >
+      <p className="text-center pb-2">Select the date for your rental.</p>
       <div className="calendar-container">
         <div className="flex flex-col items-center space-y-4 pb-8">
           <div className="px-2 pt-4 border-2 w-auto bg-transparent rounded-xl ">
@@ -87,20 +85,6 @@ export default function BookingCalendar() {
               className="flex flex-col items-center space-y-3 border-b  pb-2"
               style={{ borderColor: "rgba(var(--text), .5)" }}
             >
-              <select
-                value={quantity}
-                onChange={handleQuantityChange}
-                className={`py-2 px-3 rounded-full w-[94%] text-center select-element ${
-                  darkMode ? "" : "light-mode"
-                }`}
-              >
-                {Array.from({ length: 5 }, (_, i) => i + 1).map((quantity) => (
-                  <option key={quantity} value={quantity}>
-                    {quantity} {quantity > 1 ? "Starlinks" : "Starlink"}
-                  </option>
-                ))}
-              </select>
-
               <div className="flex justify-center space-x-3 px-2 w-full">
                 <select
                   value={month}
@@ -174,7 +158,7 @@ export default function BookingCalendar() {
               </div>
             </div>
           </div>
-          <div className="flex flex-col items-center p-4 border-2 rounded-xl mt-3 w-full">
+          <div className="flex flex-col items-center p-4 rounded-xl mt-3 w-full">
             <h3 className="text-xl">Selected Dates: </h3>
             <p>
               {selectedRange.start && selectedRange.end
@@ -186,7 +170,7 @@ export default function BookingCalendar() {
                     month: "long",
                     day: "numeric",
                     year: "numeric",
-                  })}, ${quantity} ${quantity > 1 ? "Starlinks" : "Starlink"}`
+                  })}`
                 : "None"}
             </p>
             {errorMessage && <p className="text-red-500">{errorMessage}</p>}
@@ -194,12 +178,30 @@ export default function BookingCalendar() {
         </div>
       </div>
       <div className="flex justify-end">
-        <div className="flex flex-row items-center">
+        <div className="flex flex-row w-full justify-between items-center">
           <button
-            type="submit"
+            onClick={goBack}
             className={`${
               darkMode ? "" : "light-mode"
-            } flex flex-row justify-center items-center text-right gap-2 px-4`}
+            } flex flex-row justify-center items-center text-right gap-2 p-6`}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              className="transform rotate-180"
+            >
+              <path d="M10,20A10,10,0,1,0,0,10,10,10,0,0,0,10,20ZM8.711,4.3l5.7,5.766L8.7,15.711,7.3,14.289l4.289-4.242L7.289,5.7Z" />
+            </svg>
+            Back
+          </button>
+          <button
+            onClick={onNext}
+            className={`${
+              darkMode ? "" : "light-mode"
+            } flex flex-row justify-center items-center text-right gap-2 p-6`}
           >
             Next
             <svg

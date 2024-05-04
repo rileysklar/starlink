@@ -1,19 +1,16 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
-import BookingCalendar from "../components/BookingCalendar";
+import App from "../components/App";
 ---
 
 <Layout title="StarLink Rentals">
   <main
+    class="flex items-center justify-center"
     style={{
       backgroundColor: "var(--background)",
       color: "var(--text-color)",
     }}
-    class="w-full max-h-dvh min-h-dvh"
   >
-    <h1 class="text-2xl pt-8 font-bold text-center">📡 StarLink Rentals</h1>
-    <p class="text-center">Select the quantity and date for your rental.</p>
-    <BookingCalendar client:load />
+    <App client:load />
   </main>
 </Layout>
