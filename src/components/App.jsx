@@ -4,16 +4,16 @@ import LogoLander from "./LogoLander";
 import TopNav from "./TopNav";
 import Product from "./Product";
 import Cart from "./Cart";
+import Faq from "./Faq";
 
 export default function App() {
   const [showLogo, setShowLogo] = useState(true);
-  const [view, setView] = useState("product");
+  const [view, setView] = useState("faq");
   const [history, setHistory] = useState([]);
   const [quantities, setQuantities] = useState({
     "Product 1": 1,
     "Product 2": 1,
   });
-  const [darkMode, setDarkMode] = useState(true);
   const [selectedRange, setSelectedRange] = useState({
     start: null,
     end: null,
@@ -29,13 +29,22 @@ export default function App() {
 
   const goToNextView = () => {
     setHistory([...history, view]); // add current view to history before navigating to next view
-    setView(view === "product" ? "booking" : "cart");
+    if (view === "logo") {
+      setView("faq");
+    } else if (view === "faq") {
+      setView("product");
+    } else if (view === "product") {
+      setView("booking");
+    } else if (view === "booking") {
+      setView("cart");
+    }
   };
-
   const goBack = () => {
+    console.log("goBack is called");
     if (history.length > 0) {
-      setView(history[history.length - 1]);
-      setHistory((prevHistory) => prevHistory.slice(0, prevHistory.length - 1));
+      const lastView = history[history.length - 1];
+      setView(lastView); // set the view to the last one in the history
+      setHistory(history.slice(0, -1)); // remove the last view from the history
     }
   };
 
@@ -48,33 +57,35 @@ export default function App() {
   const totalQuantity = Object.values(quantities).reduce((a, b) => a + b, 0);
 
   return (
-    <div className="App h-screen flex flex-col justify-start content-center w-full max-w-[500px]">
+    <div className="App min-h-screen flex flex-col p-4 justify-start content-center w-full max-w-[500px]">
       <TopNav client:load />
       {showLogo ? (
         <LogoLander client:load />
+      ) : view === "faq" ? (
+        <Faq onNext={goToNextView} onBack={goBack} />
       ) : view === "product" ? (
         <Product
           onNext={goToNextView}
-          onBack={goBack}
+          goBack={goBack}
           onQuantityChange={handleQuantityChange}
           initialQuantity={quantities}
         />
       ) : view === "booking" ? (
         <BookingCalendar
-          darkMode={darkMode}
-          setDarkMode={setDarkMode}
           selectedRange={selectedRange}
           setSelectedRange={setSelectedRange}
           onNext={goToNextView}
-          onBack={goBack}
+          goBack={goBack}
         />
       ) : (
-        <Cart
-          dates={selectedRange}
-          quantity={totalQuantity}
-          onNext={goToNextView}
-          onBack={goBack}
-        />
+        view === "cart" && (
+          <Cart
+            dates={selectedRange}
+            quantity={totalQuantity}
+            onNext={goToNextView}
+            goBack={goBack}
+          />
+        )
       )}
     </div>
   );

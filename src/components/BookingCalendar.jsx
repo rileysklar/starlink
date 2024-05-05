@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import "./BookingCalendar.css";
 
 export default function BookingCalendar({
-  darkMode,
   goBack,
   selectedRange,
   setSelectedRange,
@@ -65,33 +64,25 @@ export default function BookingCalendar({
     }
   }, [selectedRange]);
 
-  useEffect(() => {
-    document.body.classList.toggle("light-mode", !darkMode);
-  }, [darkMode]);
-
   return (
-    <div
-      className="flex flex-col"
-      style={{
-        backgroundColor: "var(--background)",
-        color: "var(--text-color)",
-      }}
-    >
-      <p className="text-center pb-2">Select the date for your rental.</p>
-      <div className="calendar-container">
+    <div className="flex flex-col">
+      <div className="flex-1 flex flex-col items-center content-center mb-4 p-6 border border-gray-300 rounded-lg">
+        <h2 className="text-xl font-bold">
+          Select the date range for your rental
+        </h2>
+      </div>
+      <div className="calendar-container ">
         <div className="flex flex-col items-center space-y-4 pb-8">
-          <div className="px-2 pt-4 border-2 w-auto bg-transparent rounded-xl ">
+          <div className="px-2 pt-4 border border-gray-300 w-full bg-transparent rounded-xl ">
             <div
-              className="flex flex-col items-center space-y-3 border-b  pb-2"
+              className="flex flex-col items-center space-y-3 border-b pb-2"
               style={{ borderColor: "rgba(var(--text), .5)" }}
             >
               <div className="flex justify-center space-x-3 px-2 w-full">
                 <select
                   value={month}
                   onChange={handleMonthChange}
-                  className={`bg-transparent py-2 px-3 rounded-full border w-1/2 text-center select-element ${
-                    darkMode ? "" : "light-mode"
-                  }`}
+                  className={`bg-transparent py-2 px-3 rounded-full border w-1/2 text-center select-element `}
                 >
                   {months.map((name, index) => (
                     <option key={index} value={index}>
@@ -102,9 +93,7 @@ export default function BookingCalendar({
                 <select
                   value={year}
                   onChange={handleYearChange}
-                  className={`bg-transparent py-2 px-3 rounded-full border w-1/2 text-center select-element ${
-                    darkMode ? "" : "light-mode"
-                  }`}
+                  className={`bg-transparent py-2 px-3 rounded-full border w-1/2 text-center select-element `}
                 >
                   {years.map((year, index) => (
                     <option key={index} value={year}>
@@ -125,7 +114,7 @@ export default function BookingCalendar({
               <div className="grid grid-cols-7 gap-2">
                 {placeholders.map((_, index) => (
                   <div
-                    className="flex rounded-md aspect-square justify-center  items-center border border-gray-300 p-2"
+                    className="flex rounded-full aspect-square justify-center  items-center border border-gray-300 p-2"
                     key={`placeholder-${index}`}
                   ></div>
                 ))}
@@ -133,7 +122,7 @@ export default function BookingCalendar({
                   const date = new Date(year, month, day);
                   return (
                     <div
-                      className={`flex justify-center rounded-md aspect-square text-sm items-center border border-gray-300 p-2 cursor-pointer 
+                      className={`flex justify-center rounded-full aspect-square text-sm items-center border border-gray-300 p-2 cursor-pointer 
         ${
           selectedRange.start?.getTime() === date.getTime() ||
           selectedRange.end?.getTime() === date.getTime()
@@ -181,9 +170,7 @@ export default function BookingCalendar({
         <div className="flex flex-row w-full justify-between items-center">
           <button
             onClick={goBack}
-            className={`${
-              darkMode ? "" : "light-mode"
-            } flex flex-row justify-center items-center text-right gap-2 p-6`}
+            className={` flex flex-row justify-center items-center text-right gap-2 p-6`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -199,9 +186,7 @@ export default function BookingCalendar({
           </button>
           <button
             onClick={onNext}
-            className={`${
-              darkMode ? "" : "light-mode"
-            } flex flex-row justify-center items-center text-right gap-2 p-6`}
+            className={`flex flex-row justify-center items-center text-right gap-2 p-6`}
           >
             Next
             <svg
