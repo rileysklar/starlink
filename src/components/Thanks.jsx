@@ -48,7 +48,7 @@ export default function Thanks({
       </div>
       <p>
         Thank you for booking your StarLink rental with us! We will be in touch
-        with you via email for within 48 hours for payment and next steps.{" "}
+        with you via email within 48 hours for payment and next steps.
       </p>
 
       <div className="flex justify-end">
