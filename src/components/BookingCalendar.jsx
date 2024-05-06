@@ -67,12 +67,12 @@ export default function BookingCalendar({
   return (
     <div className="flex flex-col">
       <div className="flex-1 flex flex-col items-center content-center mb-4 p-6 border border-gray-300 rounded-lg">
-        <h2 className="text-xl font-bold">
+        <h2 className="text-xl text-center font-bold">
           Select the date range for your rental
         </h2>
       </div>
       <div className="calendar-container ">
-        <div className="flex flex-col items-center space-y-4 pb-8">
+        <div className="flex flex-col items-center space-y-4">
           <div className="px-2 pt-4 border border-gray-300 w-full bg-transparent rounded-xl ">
             <div
               className="flex flex-col items-center space-y-3 border-b pb-2"

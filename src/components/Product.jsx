@@ -35,7 +35,7 @@ export default function Product({
             Starlink
           </h2>
           <p className="text-md text-center">
-            High-speed internet. Available almost anywhere on Earth.
+            High-speed internet. Available anywhere on Earth.
           </p>
           <label className="block mt-4">
             <select
