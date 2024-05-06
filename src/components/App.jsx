@@ -5,15 +5,16 @@ import TopNav from "./TopNav";
 import Product from "./Product";
 import Cart from "./Cart";
 import Faq from "./Faq";
+import Thanks from "./Thanks";
 
 export default function App() {
+  const [product1Quantity, setProduct1Quantity] = useState(0);
+  const [product2Quantity, setProduct2Quantity] = useState(0);
+
   const [showLogo, setShowLogo] = useState(true);
   const [view, setView] = useState("faq");
   const [history, setHistory] = useState([]);
-  const [quantities, setQuantities] = useState({
-    "Product 1": 1,
-    "Product 2": 1,
-  });
+
   const [selectedRange, setSelectedRange] = useState({
     start: null,
     end: null,
@@ -37,8 +38,11 @@ export default function App() {
       setView("booking");
     } else if (view === "booking") {
       setView("cart");
+    } else if (view === "cart") {
+      setView("thanks"); // Navigate to the Thanks view after the Cart view
     }
   };
+
   const goBack = () => {
     console.log("goBack is called");
     if (history.length > 0) {
@@ -47,14 +51,6 @@ export default function App() {
       setHistory(history.slice(0, -1)); // remove the last view from the history
     }
   };
-
-  const handleQuantityChange = (product, quantity) => {
-    setQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [product]: quantity,
-    }));
-  };
-  const totalQuantity = Object.values(quantities).reduce((a, b) => a + b, 0);
 
   return (
     <div className="App min-h-screen flex flex-col p-4 justify-start content-center w-full max-w-[500px]">
@@ -67,8 +63,10 @@ export default function App() {
         <Product
           onNext={goToNextView}
           goBack={goBack}
-          onQuantityChange={handleQuantityChange}
-          initialQuantity={quantities}
+          product1Quantity={product1Quantity}
+          setProduct1Quantity={setProduct1Quantity}
+          product2Quantity={product2Quantity}
+          setProduct2Quantity={setProduct2Quantity}
         />
       ) : view === "booking" ? (
         <BookingCalendar
@@ -77,16 +75,22 @@ export default function App() {
           onNext={goToNextView}
           goBack={goBack}
         />
-      ) : (
-        view === "cart" && (
-          <Cart
-            dates={selectedRange}
-            quantity={totalQuantity}
-            onNext={goToNextView}
-            goBack={goBack}
-          />
-        )
-      )}
+      ) : view === "cart" ? (
+        <Cart
+          dates={selectedRange}
+          product1Quantity={product1Quantity}
+          product2Quantity={product2Quantity}
+          onNext={goToNextView}
+          goBack={goBack}
+        />
+      ) : view === "thanks" ? (
+        <Thanks
+          goBack={goBack}
+          dates={selectedRange}
+          product1Quantity={product1Quantity}
+          product2Quantity={product2Quantity}
+        />
+      ) : null}
     </div>
   );
 }

@@ -1,6 +1,13 @@
 import React, { useEffect } from "react";
+import "./Cart.css";
 
-export default function Cart({ dates = {}, quantity, onNext, goBack }) {
+export default function Cart({
+  dates,
+  onNext,
+  product1Quantity,
+  product2Quantity,
+  goBack,
+}) {
   const { start, end } = dates;
 
   return (
@@ -12,7 +19,7 @@ export default function Cart({ dates = {}, quantity, onNext, goBack }) {
       }}
     >
       <div className="flex-1 flex flex-col items-center content-center mb-4 p-6 border border-gray-300 rounded-lg">
-        <h2 className="text-xl font-bold">
+        <h2 className="text-xl text-center font-bold">
           <p>
             {start?.toLocaleDateString("en-US", {
               month: "long",
@@ -27,8 +34,19 @@ export default function Cart({ dates = {}, quantity, onNext, goBack }) {
             })}
           </p>
         </h2>
+        <div className="">
+          {product1Quantity !== undefined && (
+            <div className="flex flex-row">
+              <h2>StarLink quantity: {product1Quantity}</h2>
+            </div>
+          )}
+          {product2Quantity !== undefined && (
+            <div className="flex flex-row">
+              <h2>Battery quantity: {product2Quantity}</h2>
+            </div>
+          )}
+        </div>
       </div>
-      <div className="md:flex"></div>
 
       <form className="">
         <div className=" text-2xl pb-2 font-semibold">Contact Information</div>
@@ -96,8 +114,19 @@ export default function Cart({ dates = {}, quantity, onNext, goBack }) {
         <input
           className="mb-2 w-full p-2 rounded-md hidden"
           type="number"
-          placeholder="Quantity"
-          value={quantity}
+          placeholder="StarLink Quantity"
+          value={product1Quantity}
+          readOnly
+          style={{
+            backgroundColor: "var(--background)",
+            color: "var(--text-color)",
+          }}
+        />
+        <input
+          className="mb-2 w-full p-2 rounded-md hidden"
+          type="number"
+          placeholder="Battery Quantity"
+          value={product2Quantity}
           readOnly
           style={{
             backgroundColor: "var(--background)",
@@ -105,8 +134,9 @@ export default function Cart({ dates = {}, quantity, onNext, goBack }) {
           }}
         />
         <button
-          className="w-full p-2 rounded-md bg-blue-500 text-white"
+          className="w-full p-2 rounded-full bg-[var(--accent)] "
           type="submit"
+          onClick={onNext}
         >
           Submit
         </button>
@@ -129,7 +159,7 @@ export default function Cart({ dates = {}, quantity, onNext, goBack }) {
             </svg>
             Back
           </button>
-          <button
+          {/* <button
             onClick={onNext}
             className={`$\flex flex-row justify-center items-center text-right gap-2 p-6`}
           >
@@ -143,7 +173,7 @@ export default function Cart({ dates = {}, quantity, onNext, goBack }) {
             >
               <path d="M10,20A10,10,0,1,0,0,10,10,10,0,0,0,10,20ZM8.711,4.3l5.7,5.766L8.7,15.711,7.3,14.289l4.289-4.242L7.289,5.7Z" />
             </svg>
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

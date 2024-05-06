@@ -126,7 +126,7 @@ export default function BookingCalendar({
         ${
           selectedRange.start?.getTime() === date.getTime() ||
           selectedRange.end?.getTime() === date.getTime()
-            ? "bg-cyan-300 text-indigo-950"
+            ? "bg-[var(--accent)] "
             : ""
         }
         ${
@@ -134,7 +134,7 @@ export default function BookingCalendar({
           selectedRange.end &&
           date.getTime() > selectedRange.start.getTime() &&
           date.getTime() < selectedRange.end.getTime()
-            ? "bg-emerald-300 text-indigo-950"
+            ? "bg-[var(--accent)]"
             : ""
         }`}
                       key={day}
@@ -147,7 +147,7 @@ export default function BookingCalendar({
               </div>
             </div>
           </div>
-          <div className="flex flex-col items-center p-4 rounded-xl mt-3 w-full">
+          <div className="flex-1 flex flex-col items-center content-center mb-4 p-6 w-full border border-gray-300 rounded-lg">
             <h3 className="text-xl">Selected Dates: </h3>
             <p>
               {selectedRange.start && selectedRange.end

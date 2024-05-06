@@ -3,44 +3,46 @@ import React, { useState, useEffect } from "react";
 export default function Product({
   onNext,
   goBack,
-  onQuantityChange,
-  initialQuantity,
+  product1Quantity,
+  setProduct1Quantity,
+  product2Quantity,
+  setProduct2Quantity,
 }) {
-  const [quantity, setQuantity] = useState(initialQuantity || 1);
   const handleQuantityChangeProduct1 = (event) => {
-    onQuantityChange("Product 1", parseInt(event.target.value, 10));
+    setProduct1Quantity(parseInt(event.target.value));
   };
 
   const handleQuantityChangeProduct2 = (event) => {
-    onQuantityChange("Product 2", parseInt(event.target.value, 10));
+    setProduct2Quantity(parseInt(event.target.value));
   };
 
   return (
     <div>
       <div className="flex-1 flex flex-col items-center content-center mb-4 p-6 border border-gray-300 rounded-lg">
-        <h2 className="text-xl font-bold ">Select your product and quantity</h2>
+        <h2 className="text-xl text-center font-bold ">
+          Select your product and quantity
+        </h2>
       </div>
-      <div className="grid grid-cols-1 gap-4">
+      <div className="grid grid-cols-2 gap-4">
         {" "}
-        <div className="flex-1 flex flex-col items-center content-center p-6 border border-gray-300 rounded-lg">
+        <div className="flex-1 flex flex-col items-center content-center p-4 border border-gray-300 rounded-lg">
           <img
             src="/starlink.png"
             alt="Product 1"
-            className="rounded-lg mb-4 w-[200px] aspect-square"
+            className="rounded-lg mb-4 w-[150px] aspect-square"
           />
-          <h2 className="text-xl font-bold mb-2">Starlink</h2>
-          <p className="">
+          <h2 className="text-xl text-center leading-3 font-bold mb-2">
+            Starlink
+          </h2>
+          <p className="text-md text-center">
             High-speed internet. Available almost anywhere on Earth.
           </p>
           <label className="block mt-4">
-            <span className=""></span>
-
             <select
-              className={`py-2 px-3 rounded-full w-[94%] text-center select-element 
-              }`}
+              className={`py-2 px-3 rounded-full w-full text-center select-element `}
               onChange={handleQuantityChangeProduct1}
             >
-              {Array.from({ length: 5 }, (_, i) => i + 1).map((quantity) => (
+              {Array.from({ length: 5 }, (_, i) => i).map((quantity) => (
                 <option key={quantity} value={quantity}>
                   {quantity} {quantity > 1 ? "Starlinks" : "Starlink"}
                 </option>
@@ -48,23 +50,24 @@ export default function Product({
             </select>
           </label>
         </div>
-        <div className="flex-1 flex flex-col items-center content-center p-6 border border-gray-300 rounded-lg">
+        <div className="flex-1 flex flex-col items-center content-center p-4 border border-gray-300 rounded-lg">
           <img
             src="/battery.png"
             alt="battery"
-            className="rounded-lg mb-4 w-[200px] aspect-square"
+            className="rounded-lg mb-4 w-[150px] aspect-square"
           />
-          <h2 className="text-xl font-bold mb-2">Battery</h2>
-          <p className="">
+          <h2 className="text-xl text-center leading-3 font-bold mb-2">
+            Battery
+          </h2>
+          <p className="text-md text-center">
             Designed for heavy-duty use in extreme environments.
           </p>
           <label className="block mt-4">
-            <span className=""></span>
             <select
-              className={`py-2 px-3 rounded-full w-[94%] text-center select-element `}
+              className={`py-2 px-3 rounded-full w-full text-center select-element `}
               onChange={handleQuantityChangeProduct2}
             >
-              {Array.from({ length: 5 }, (_, i) => i + 1).map((quantity) => (
+              {Array.from({ length: 5 }, (_, i) => i).map((quantity) => (
                 <option key={quantity} value={quantity}>
                   {quantity} {quantity > 1 ? "Batteries" : "Battery"}
                 </option>

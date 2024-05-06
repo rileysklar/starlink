@@ -17,32 +17,6 @@ export default function Faq({ onNext }) {
       answer:
         "The cost of renting Starlink can vary depending on the rental duration and the platform from which you are renting. Please check the specific platform for accurate pricing.",
     },
-    {
-      question: "What is included in a Starlink rental?",
-      answer:
-        "A typical Starlink rental includes the Starlink Kit, which consists of a dish, a modem, and a power supply.",
-    },
-    {
-      question: "Can I use Starlink anywhere?",
-      answer:
-        "Starlink is designed to deliver high speed broadband internet to locations where access has been unreliable, expensive, or completely unavailable. However, the service is still in beta and therefore coverage may not be available everywhere.",
-    },
-    {
-      question: "What internet speeds can I expect with Starlink?",
-      answer:
-        "During beta, users can expect to see data speeds vary from 50Mb/s to 150Mb/s and latency from 20ms to 40ms in most locations.",
-    },
-    {
-      question: "Is there a data cap on Starlink rentals?",
-      answer:
-        "Currently, Starlink does not enforce data caps. However, this may change in the future.",
-    },
-    {
-      question:
-        "What happens if the Starlink equipment gets damaged during my rental period?",
-      answer:
-        "The terms for damage to rented equipment will depend on the rental agreement. Typically, you may be responsible for repair or replacement costs.",
-    },
   ];
 
   const AccordionItem = ({ question, answer, isOpen, onClick }) => (
@@ -54,7 +28,9 @@ export default function Faq({ onNext }) {
         {question}
         <span className="float-right">{isOpen ? "-" : "+"}</span>
       </button>
-      {isOpen && <p className="px-4 pb-3">{answer}</p>}
+      {isOpen && (
+        <p className="p-4 mb-4 bg-[var(--accent)] rounded-lg ">{answer}</p>
+      )}
     </div>
   );
 
@@ -79,13 +55,20 @@ export default function Faq({ onNext }) {
   return (
     <div className="flex flex-col justify-between">
       <div className="flex-1 flex flex-col items-center content-center mb-4 p-6 border border-gray-300 rounded-lg">
-        <h2 className="text-xl font-bold">Welcome to StarLink Rental</h2>
+        <img
+          src="/starlink-rv.jpg"
+          alt="Product 1"
+          className="rounded-lg mb-4 "
+        />{" "}
+        <h2 className="text-xl text-center font-bold">
+          Rent a StarLink for your event, festival or wedding today!
+        </h2>
       </div>
       <Accordion items={faqData} />
       <div className="flex flex-row items-center justify-end">
         <button
           type="submit"
-          className="flex flex-row justify-center items-center text-right gap-2 p-6"
+          className="flex my-4 w-full flex-row justify-center bg-[var(--accent)] rounded-full items-center text-right gap-2 px-4 py-2"
           onClick={onNext}
         >
           Get Started
