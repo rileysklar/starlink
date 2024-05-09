@@ -7,6 +7,7 @@ export default function Product({
   setProduct1Quantity,
   product2Quantity,
   setProduct2Quantity,
+  flattenedProducts,
 }) {
   const handleQuantityChangeProduct1 = (event) => {
     setProduct1Quantity(parseInt(event.target.value));
@@ -25,7 +26,7 @@ export default function Product({
       </div>
       <div className="grid grid-cols-2 gap-4">
         {" "}
-        <div className="flex-1 flex flex-col items-center content-center p-4 border border-gray-300 rounded-lg">
+        {/* <div className="flex-1 flex flex-col items-center content-center p-4 border border-gray-300 rounded-lg">
           <img
             src="/starlink.png"
             alt="Product 1"
@@ -49,8 +50,36 @@ export default function Product({
               ))}
             </select>
           </label>
-        </div>
-        <div className="flex-1 flex flex-col items-center content-center p-4 border border-gray-300 rounded-lg">
+        </div> */}{" "}
+        {flattenedProducts.map((product) => (
+          <div
+            key={product.id}
+            className="flex-1 flex flex-col items-center content-center p-4 border border-gray-300 rounded-lg"
+          >
+            <img
+              src={product.imageUrl}
+              alt={product.product_name}
+              className="rounded-lg mb-4 w-[150px] aspect-square"
+            />
+            <h2 className="text-xl text-center leading-3 font-bold mb-2">
+              {product.product_name}
+            </h2>
+            <p className="text-md text-center">{product.product_description}</p>
+            <label className="block mt-4">
+              <select
+                className={`py-2 px-3 rounded-full w-full text-center select-element `}
+                onChange={handleQuantityChangeProduct1}
+              >
+                {Array.from({ length: 5 }, (_, i) => i).map((quantity) => (
+                  <option key={quantity} value={quantity}>
+                    {quantity} {quantity > 1 ? "Starlinks" : "Starlink"}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+        ))}
+        {/* <div className="flex-1 flex flex-col items-center content-center p-4 border border-gray-300 rounded-lg">
           <img
             src="/battery.png"
             alt="battery"
@@ -74,7 +103,7 @@ export default function Product({
               ))}
             </select>
           </label>
-        </div>
+        </div> */}
       </div>
       <div className="flex justify-end">
         <div className="flex flex-row w-full justify-between items-center">

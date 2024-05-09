@@ -7,7 +7,44 @@ import Cart from "./Cart";
 import Faq from "./Faq";
 import Thanks from "./Thanks";
 
-export default function App() {
+function flattenProductData(products) {
+  return products.map((product) => {
+    const { id, acf_fields } = product;
+    const { product_name, product_description, product_image } = acf_fields;
+
+    let imageUrl = "";
+    let maxArea = 0;
+
+    // Check if there are image sizes and find the largest one
+    if (product_image && product_image.sizes) {
+      const sizes = product_image.sizes;
+      for (const size in sizes) {
+        if (size.includes("width") && sizes[size.replace("width", "height")]) {
+          const width = parseInt(sizes[size], 10);
+          const height = parseInt(sizes[size.replace("width", "height")], 10);
+          const area = width * height;
+          if (area > maxArea) {
+            maxArea = area;
+            imageUrl = sizes[size.replace("-width", "")];
+          }
+        }
+      }
+    }
+
+    return {
+      id,
+      product_name,
+      product_description,
+      imageUrl,
+    };
+  });
+}
+
+export default function App({ products }) {
+  console.log(flattenProductData(products));
+
+  const flattenedProducts = flattenProductData(products);
+
   const [product1Quantity, setProduct1Quantity] = useState(0);
   const [product2Quantity, setProduct2Quantity] = useState(0);
 
@@ -67,6 +104,7 @@ export default function App() {
           setProduct1Quantity={setProduct1Quantity}
           product2Quantity={product2Quantity}
           setProduct2Quantity={setProduct2Quantity}
+          flattenedProducts={flattenedProducts}
         />
       ) : view === "booking" ? (
         <BookingCalendar

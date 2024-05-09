@@ -1,6 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import App from "../components/App";
+const API_URL = import.meta.env.WORDPRESS_API_URL;
+const res = await fetch(`${API_URL}/product`);
+const products = await res.json();
+
+console.log(products);
 ---
 
 <Layout title="StarLink Rentals">
@@ -11,6 +16,6 @@ import App from "../components/App";
       color: "var(--text-color)",
     }}
   >
-    <App client:load />
+    <App client:load products={products} />
   </main>
 </Layout>
