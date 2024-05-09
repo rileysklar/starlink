@@ -56,9 +56,14 @@ export default function Product({
             key={product.id}
             className="flex-1 flex flex-col items-center content-center p-4 border border-gray-300 rounded-lg"
           >
-            <img
+            {/* <img
               src={product.imageUrl}
               alt={product.product_name}
+              className="rounded-lg mb-4 w-[150px] aspect-square"
+            /> */}
+            <img
+              src="/starlink.png"
+              alt="Product 1"
               className="rounded-lg mb-4 w-[150px] aspect-square"
             />
             <h2 className="text-xl text-center leading-3 font-bold mb-2">
